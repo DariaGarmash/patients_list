@@ -1,0 +1,11 @@
+.error-state {
+    text-align: center;
+    padding: spacing(1) spacing(1);
+    background: $danger;
+    color: $white;
+    flex-basis: 100%;
+}
+
+.loading-state {
+    font-weight: bold;
+}
