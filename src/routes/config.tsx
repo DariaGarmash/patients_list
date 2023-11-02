@@ -1,4 +1,3 @@
-import React from 'react'
 import NotFound from "../app/pages/NotFound";
 import PatientDetails from "../app/pages/PatientDetails";
 import PatientOverview from "../app/pages/PatientOverview";

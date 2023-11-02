@@ -1,0 +1,28 @@
+%cell-padding {
+    padding: spacing(1) spacing(2);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid $grey-dark;
+    font-size: 14px;
+
+    th {
+        text-align: left;
+        @extend %cell-padding;
+        background: $grey-light;
+    }
+
+    tbody {
+        tr {
+            td {
+                @extend %cell-padding;
+
+                &.is-centered {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
