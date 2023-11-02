@@ -1,0 +1,38 @@
+@import "_variables";
+@import "functions";
+@import "_common";
+
+
+
+.header {
+	height: $header-height;
+	padding: spacing(2);
+	color: $black;
+
+	>* {
+		margin: 0;
+	}
+}
+
+#root, .app-wrapper{
+	min-height: 100vh;
+}
+.app-wrapper {
+
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: spacing(4) spacing(5);
+	box-sizing: border-box;
+
+	.app-header{
+		padding: spacing(1) 0;
+	}
+
+	.error {
+		text-align: center;
+		padding: spacing(1) spacing(1);
+		background: $danger;
+		color: $white;
+		flex-basis: 100%;
+	}
+}

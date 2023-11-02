@@ -1,0 +1,26 @@
+// Theme
+$white: #ffffff;
+$black: #4a4747;
+$grey-light: #f6f6f6;
+$grey-dark: darken($grey-light, 10);
+$grey-deep-dark: #686464;
+$yellow: rgb(245, 247, 164);
+$red: rgb(255, 150, 121);
+$blue: rgb(180, 212, 255);
+$dark-blue: rgb(4, 93, 209);
+$green: rgb(182, 63, 152);
+$dark-orange: rgb(209, 120, 4);
+
+$primary: $black;
+$secondary: $dark-orange;
+$primary-color: $white;
+
+$success: lighten($dark-blue, 50%);
+$warning: $yellow;
+$danger: $red;
+
+// Measurements
+$header-height: 5rem;
+$default-space: 0.5rem;
+
+$border-radius: 5px;
