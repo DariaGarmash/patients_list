@@ -8,7 +8,7 @@ export const routes = (
         <Route path="/" element={<Outlet />}>
             <Route index element={<PatientOverview />} />
             <Route path="patients" element={<PatientOverview />} />
-            <Route path="patient/edit" element={<PatientDetails />} />
+            <Route path="patient/:id/edit" element={<PatientDetails />} />
         </Route>
         <Route path="*" element={<NotFound />} />
     </Routes>
