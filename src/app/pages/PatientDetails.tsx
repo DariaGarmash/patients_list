@@ -5,8 +5,8 @@ import NoData from "../components/states/NoData";
 import Avatar from '../components/Avatar';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import { diffYearsReadable } from '../../utils/dateUtils';
-import { definePateintStatus } from "../helpers/patientStatus";
 import Panel from "../components/Panel";
+import VaccinationStatus from "../components/patientDetails/VaccinationStatus";
 
 export const PatientDetails = () => {
 	const { id } = useParams()
@@ -32,16 +32,7 @@ export const PatientDetails = () => {
 				</section>
 				<section className="row">
 					<Panel title='Vaccination'>
-						<article className="property-list">
-							<div>
-								<span className="label">Status:</span>
-								<span className={`badge ${definePateintStatus(patient.vaccinationStatus)}`}>
-									{patient.vaccinationStatus}
-								</span>
-								<small> ({patient.isVaccinated ? 'vaccinated' : 'not vaccinated'})</small>
-							</div>
-							<div>Date: {patient.vaccinationDate}</div>
-						</article>
+						<VaccinationStatus {...patient} />
 					</Panel>
 					
 				</section>
