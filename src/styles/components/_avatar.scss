@@ -1,0 +1,13 @@
+.avatar-holder {
+    display: inline-block;
+    background-size: contain;
+    border-radius: 50%;
+
+    width: 150px;
+    height: 150px;
+
+    .small {
+        width: 35px;
+        height: 35px;
+    }
+}

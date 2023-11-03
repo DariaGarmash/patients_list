@@ -55,7 +55,7 @@ export const PatientOverview = () => {
 
 	return (
 		<>	
-			<Header title='Patients'></Header>
+			<Header title='Patients'/>
 			<Table data={patients} columns={columns} actions={actions}
 				isLoading={isLoading} error={error} 
 				rowClassNamesSetter={defineRowStyling}/>

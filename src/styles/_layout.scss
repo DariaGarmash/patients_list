@@ -1,0 +1,10 @@
+%flex {
+    display: flex;
+}
+
+.row {
+    @extend %flex;
+    flex-flow: row wrap;
+    gap: spacing(4);
+    margin-bottom: spacing(5);
+}
