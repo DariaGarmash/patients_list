@@ -18,13 +18,13 @@ export type TableProps<T> = {
 	data?: T[] | null;
 	columns: TColumn<T>[];
 	isLoading?: boolean;
-	isError?: boolean;
+	error?: string;
 	actions?: TAction<T>[];
 }
 
-export const Table = <T extends object>({ data, columns, isLoading, isError, actions = [] }: TableProps<T>) => {
-	if (isError) {
-		return <ErrorState/>
+export const Table = <T extends object>({ data, columns, isLoading, error, actions = [] }: TableProps<T>) => {
+	if (!!error) {
+		return <ErrorState message={error}/>
 	}
 	if (data == null|| isLoading) {
 		return <Loader />

@@ -1,6 +1,7 @@
+import { ComponentPropsWithoutRef } from 'react'
 import { TableProps } from "./Table";
 
-type TableRowProps<T> =
+type TableRowProps<T> = ComponentPropsWithoutRef<"tr"> &
 	Pick<TableProps<T>, 'columns' | 'actions'> & {
 		row: T;
 	}
@@ -10,7 +11,7 @@ const TableRow = <T,>({ row, columns, actions = [] }: TableRowProps<T>): JSX.Ele
 	const actionsNode = (
 		actions.length === 0 ?
 			undefined :
-			<>{actions.map(act => <button onClick={() => act.onClick(row)}>{act.label}</button>)}</>
+			<>{actions.map(act => <button key={act.label} onClick={() => act.onClick(row)}>{act.label}</button>)}</>
 	)
 
 	const cells = (

@@ -1,8 +1,6 @@
 import { TableProps } from "./Table";
 import TableRow from "./TableRow";
 
-export type TRowClassNamesSetter<T> = (data: T) => string;
-
 const TableRows = <T,>({ data, columns, actions }: TableProps<T>): JSX.Element => {
 
 	return (
