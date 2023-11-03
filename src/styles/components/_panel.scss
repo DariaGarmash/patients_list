@@ -1,0 +1,34 @@
+.panel {
+    min-width: 400px;
+    border: 1px solid $primary;
+    border-radius: $border-radius;
+
+    > * {
+        padding: spacing(2); 
+    }
+
+    &-header {
+        background-color: $primary;
+        color: $primary-color;
+        border-top-right-radius: $border-radius;
+        border-top-left-radius: $border-radius;
+        border-bottom: 1px solid $grey-dark;
+
+        * {
+            margin: 0;
+        }
+    }
+
+    &-body {
+        border-bottom-right-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        > li {
+            padding: spacing(1) 0;
+        }
+    }
+}
