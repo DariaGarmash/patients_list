@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
 import raw_data from "../../public/data.json";
-import { PatientEntityView, PatientWithVaccinationStatus, TPatient } from "../../adapters/patientsDataAdapter";
+import {PatientEntity, PatientsView, TPatient } from "../../adapters/patientsDataAdapter";
 import Header from "../components/Header";
 import Table, { TColumn } from '../components/Table/Table';
 import { useNavigate } from 'react-router-dom';
 
 export const PatientOverview = () => {
-	const [patients, setPatients] = useState<PatientWithVaccinationStatus[] | null>(null);
+	const [patients, setPatients] = useState<PatientEntity[] | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isError] = useState(false);
 
 	const navigate = useNavigate();
 
-	const columns: TColumn<PatientWithVaccinationStatus>[] = [
+	const columns: TColumn<PatientEntity>[] = [
 		{ key: "fullName", label: 'Full name' },
 		{ key: "age", label: 'Age' },
 		{ key: 'sex', label: 'Sex' },
@@ -21,7 +21,7 @@ export const PatientOverview = () => {
 		{ key: 'actions', label: '' },
 	]
 
-	const onEdit = (row: PatientWithVaccinationStatus) => {
+	const onEdit = (row: PatientEntity) => {
 		navigate(`/patient/${row.id}/edit`)
 	}
 
@@ -32,7 +32,7 @@ export const PatientOverview = () => {
 	useEffect(() => {
 		setIsLoading(true)
 		setTimeout(() => {
-			const dataAdapted = new PatientEntityView(raw_data as TPatient[]).getFilteredPatients({ age: 16 })
+			const dataAdapted = new PatientsView(raw_data as TPatient[]).getPatients({ age: 16 })
 			setPatients(dataAdapted)
 			setIsLoading(false)
 			// setIsError(true)
