@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { TableProps } from "./Table";
+import Button from '../Button';
 
 export type TRowClassNamesSetter<T> = (data: T) => string;
 
@@ -13,7 +14,7 @@ const TableRow = <T,>({ row, columns, actions = [], className }: TableRowProps<T
 	const actionsNode = (
 		actions.length === 0 ?
 			undefined :
-			<>{actions.map(act => <button key={act.label} onClick={() => act.onClick(row)}>{act.label}</button>)}</>
+			<>{actions.map(act => <Button key={act.label} label={act.label} onClick={() => act.onClick(row)}>{act.label}</Button>)}</>
 	)
 
 	const cells = (

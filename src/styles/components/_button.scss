@@ -1,0 +1,21 @@
+.button {
+    padding: spacing(0.5) spacing(1);
+    min-width: 80px;
+    border-radius: $border-radius;
+    cursor: pointer;
+    margin: spacing(0.5) 0;
+
+    @include button;
+
+    &.full-width {
+        width: 100%;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+}

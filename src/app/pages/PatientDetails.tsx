@@ -10,10 +10,12 @@ import Panel from "../components/Panel";
 import VaccinationStatus from "../components/patientDetails/VaccinationStatus";
 import { PatientEntity } from "../../adapters/patientsDataAdapter";
 import "flatpickr/dist/themes/material_green.css";
+import Button from '../components/Button';
 
 export const PatientDetails = () => {
 	const { id } = useParams()
 	const { findPatient, updatePatient } = usePatientContext();
+	const [changed, setChanged] = useState(false);
 
 	const [patient, setPatient] = useState<PatientEntity | null>(findPatient(id))
 
@@ -26,11 +28,20 @@ export const PatientDetails = () => {
 
 		setPatient(updated)
 		updatePatient(updated)
+		setChanged(!changed)
+	}
+
+	const onSave = () => {
+		if (patient == null) {
+			return
+		}
+		updatePatient(patient)
+		setChanged(false)
 	}
 
 	const element = (
 		patient == null ?
-			<p>Not found</p> :
+			<NoData/> :
 			<>
 				<section className="row">
 					<Avatar url={patient.avatarUrl} />
@@ -47,6 +58,7 @@ export const PatientDetails = () => {
 				<section className="row">
 					<Panel title='Vaccination'>
 						<VaccinationStatus {...patient} onChange={onVaccinationDateSelect}/>
+						<Button actionType="edit" fullWidth onClick={onSave} disabled={!changed}>Save</Button>
 					</Panel>
 					
 				</section>

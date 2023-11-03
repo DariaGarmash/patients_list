@@ -7,3 +7,17 @@ $statuses: success, warning, danger;
         }
     }
 }
+
+$btn-types: primary, secondary;
+
+@mixin button {
+    @each $item in $btn-types {
+        $color: map-get(("primary": $primary, "secondary": $secondary), $item);
+
+        &.is-#{$item} {
+            color: $white;
+            background: $color;
+            border: 1px solid $color;
+        }
+    }
+}
