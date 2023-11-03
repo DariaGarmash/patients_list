@@ -1,18 +1,32 @@
+import React, { useState } from 'react'
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
 import { usePatientContext } from "../../context/contextHooks/usePatientsContext";
-import NoData from "../components/states/NoData";
-import Avatar from '../components/Avatar';
 import { capitalizeFirstLetter } from '../../utils/utils';
 import { diffYearsReadable } from '../../utils/dateUtils';
+import Header from "../components/Header";
+import NoData from "../components/states/NoData";
+import Avatar from '../components/Avatar';
 import Panel from "../components/Panel";
 import VaccinationStatus from "../components/patientDetails/VaccinationStatus";
+import { PatientEntity } from "../../adapters/patientsDataAdapter";
+import "flatpickr/dist/themes/material_green.css";
 
 export const PatientDetails = () => {
 	const { id } = useParams()
-	const { findPatient } = usePatientContext();
+	const { findPatient, updatePatient } = usePatientContext();
 
-	const patient = findPatient(id)
+	const [patient, setPatient] = useState<PatientEntity | null>(findPatient(id))
+
+	const onVaccinationDateSelect = (dateString: string) => {
+		if (patient == null) {
+			return
+		}
+
+		const updated = { ...patient, vaccinationDate: dateString }
+
+		setPatient(updated)
+		updatePatient(updated)
+	}
 
 	const element = (
 		patient == null ?
@@ -32,7 +46,7 @@ export const PatientDetails = () => {
 				</section>
 				<section className="row">
 					<Panel title='Vaccination'>
-						<VaccinationStatus {...patient} />
+						<VaccinationStatus {...patient} onChange={onVaccinationDateSelect}/>
 					</Panel>
 					
 				</section>

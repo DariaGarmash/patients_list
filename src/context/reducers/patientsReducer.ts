@@ -15,14 +15,30 @@ type TActionSet = {
     payload: TAppPatients;
 }
 
+type TActionUpdatePatient = {
+    type: ACTION_TYPE.UPDATE_PATIENT;
+    payload: PatientEntity;
+}
 
-export type TPatientsActions = TActionSet
+
+export type TPatientsActions = TActionSet | TActionUpdatePatient
 
 // Patients Reducer
 export const patientsReducer = (state: TAppPatients, action: TPatientsActions): TAppPatients => {
     switch (action.type) {
         case ACTION_TYPE.SET: {
             return  produce(state, (draftstate: TAppPatients): TAppPatients => draftstate = action.payload);
+        }
+        case ACTION_TYPE.UPDATE_PATIENT: {
+            return produce(state, draftstate => {
+                if (draftstate == null) {
+                    return
+                }
+                const index = draftstate.findIndex(p => p.id === action.payload.id)
+                if (index !== -1) {
+                    draftstate[index] = action.payload
+                }
+            });
         }
         default: {
             throw Error(`Unknown action`);

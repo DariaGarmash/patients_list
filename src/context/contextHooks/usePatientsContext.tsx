@@ -9,10 +9,12 @@ export const usePatientContext = () => {
 
     const setPatients = (patients: TAppPatients) => dispatch({type: ACTION_TYPE.SET, payload: patients})
     const findPatient = (id?: PatientEntity['id']) => patients !== null && !!id ? patients.find(p => p.id === id) ?? null : null
+    const updatePatient = (patient: PatientEntity) => dispatch({ type: ACTION_TYPE.UPDATE_PATIENT, payload: patient })
 
     return {
         patients,
         setPatients,
-        findPatient
+        findPatient,
+        updatePatient
     }
 }

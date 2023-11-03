@@ -1,0 +1,14 @@
+.datepicker-form-control {
+    display: flex;
+    align-items: baseline;
+    column-gap: spacing(1); 
+
+    .flatpickr-input {
+        + input.form-control {
+            flex: 1;
+            border: 1px solid $grey-dark;
+            padding: spacing(0.5);
+        
+        }
+    }
+}
