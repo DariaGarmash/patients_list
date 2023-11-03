@@ -1,12 +1,14 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { TableProps } from "./Table";
 
+export type TRowClassNamesSetter<T> = (data: T) => string;
+
 type TableRowProps<T> = ComponentPropsWithoutRef<"tr"> &
 	Pick<TableProps<T>, 'columns' | 'actions'> & {
 		row: T;
 	}
 
-const TableRow = <T,>({ row, columns, actions = [] }: TableRowProps<T>): JSX.Element => {
+const TableRow = <T,>({ row, columns, actions = [], className }: TableRowProps<T>): JSX.Element => {
 
 	const actionsNode = (
 		actions.length === 0 ?
@@ -26,7 +28,7 @@ const TableRow = <T,>({ row, columns, actions = [] }: TableRowProps<T>): JSX.Ele
 	)
 
 	return (
-		<tr key={`row-${JSON.stringify}`}>
+		<tr key={`row-${JSON.stringify}`} className={className}>
 			{cells}
 		</tr>
 	);

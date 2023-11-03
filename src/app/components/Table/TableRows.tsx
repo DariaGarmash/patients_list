@@ -1,7 +1,7 @@
 import { TableProps } from "./Table";
 import TableRow from "./TableRow";
 
-const TableRows = <T,>({ data, columns, actions }: TableProps<T>): JSX.Element => {
+const TableRows = <T,>({ data, columns, actions, rowClassNamesSetter }: TableProps<T>): JSX.Element => {
 
 	return (
 		<tbody>
@@ -9,6 +9,7 @@ const TableRows = <T,>({ data, columns, actions }: TableProps<T>): JSX.Element =
 				<TableRow key={JSON.stringify(row)}
 					row={row} columns={columns}
 					actions={actions}
+					className={rowClassNamesSetter?.(row) || ''}
 				></TableRow>
 			))}
 		</tbody>

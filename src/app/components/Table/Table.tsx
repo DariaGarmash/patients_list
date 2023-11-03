@@ -14,15 +14,18 @@ export type TAction<T> = {
 	onClick: (row: T) => void
 }
 
+export type TRowClassNamesSetter<T> = (data: T) => string;
+
 export type TableProps<T> = {
 	data?: T[] | null;
 	columns: TColumn<T>[];
 	isLoading?: boolean;
 	error?: string;
 	actions?: TAction<T>[];
+	rowClassNamesSetter?: TRowClassNamesSetter<T>
 }
 
-export const Table = <T extends object>({ data, columns, isLoading, error, actions = [] }: TableProps<T>) => {
+export const Table = <T extends object>({ data, columns, isLoading, error, actions = [], rowClassNamesSetter }: TableProps<T>) => {
 	if (!!error) {
 		return <ErrorState message={error}/>
 	}
@@ -41,7 +44,7 @@ export const Table = <T extends object>({ data, columns, isLoading, error, actio
 	return (
 		<table className="table">
 			<TableHeader columns={columns} />
-			<TableRows data={data} columns={columns} actions={actions} />
+			<TableRows data={data} columns={columns} actions={actions} rowClassNamesSetter={rowClassNamesSetter}/>
 		</table>
 	);
 };

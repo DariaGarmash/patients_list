@@ -1,0 +1,9 @@
+$statuses: success, warning, danger;
+
+@mixin status {
+    @each $status in $statuses {
+        &.is-#{$status} {
+            background: map-get(("success": $success, "warning": $warning, "danger": $danger), $status);
+        }
+    }
+}

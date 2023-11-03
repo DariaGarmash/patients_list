@@ -1,5 +1,6 @@
 @import "_variables";
 @import "functions";
+@import "mixins";
 @import "_common";
 @import "/src/styles/components/components.scss";
 
@@ -15,9 +16,11 @@
 	}
 }
 
-#root, .app-wrapper{
+#root,
+.app-wrapper {
 	min-height: 100vh;
 }
+
 .app-wrapper {
 
 	max-width: 1200px;
@@ -25,7 +28,7 @@
 	padding: spacing(4) spacing(5);
 	box-sizing: border-box;
 
-	.app-header{
+	.app-header {
 		padding: spacing(1) 0;
 	}
 

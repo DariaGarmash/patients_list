@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Table, { TColumn } from '../components/Table/Table';
 import { useNavigate } from 'react-router-dom';
 import { dataHandler } from '../../service/dataHandler';
+import { definePateintStatus } from '../helpers/patientStatus';
 
 export const PatientOverview = () => {
 	const [patients, setPatients] = useState<PatientEntity[] | null>(null);
@@ -46,12 +47,16 @@ export const PatientOverview = () => {
 	}, [patients])
 
 	
+	const defineRowStyling = (row: PatientEntity) => {
+		return definePateintStatus(row.vaccinationStatus)
+	}
 
 	return (
 		<>	
 			<Header title='Patients'></Header>
 			<Table data={patients} columns={columns} actions={actions}
-				isLoading={isLoading} error={error}/>
+				isLoading={isLoading} error={error} 
+				rowClassNamesSetter={defineRowStyling}/>
 		</>
 		
 	);
