@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import raw_data from "../../public/data.json";
 import { PatientEntityView, PatientWithVaccinationStatus, TPatient } from "../../adapters/patientsDataAdapter";
-import Header from "../componenst/Header";
-import Table, { TColumn } from '../componenst/Table/Table';
+import Header from "../components/Header";
+import Table, { TColumn } from '../components/Table/Table';
 import { useNavigate } from 'react-router-dom';
 
 export const PatientOverview = () => {
