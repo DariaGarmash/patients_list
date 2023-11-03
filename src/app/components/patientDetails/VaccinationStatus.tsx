@@ -1,9 +1,7 @@
 import React, {FC} from "react";
 import { PatientEntity } from "../../../adapters/patientsDataAdapter";
 import { definePateintStatus } from "../../helpers/patientStatus";
-import { formatISO } from "date-fns";
-import { dateTimeFormat } from "../../../utils/dateUtils";
-import Flatpickr from "react-flatpickr";
+import DateTimePicker from "../Datepiker";
 
 type TPickedProperties = 'isVaccinated' | 'vaccinationDate' | 'vaccinationStatus'
 type VaccinationStatusProps = Pick<PatientEntity, TPickedProperties> & {
@@ -13,12 +11,6 @@ type VaccinationStatusProps = Pick<PatientEntity, TPickedProperties> & {
 const VaccinationStatus: FC<VaccinationStatusProps> = (
     { isVaccinated, vaccinationDate, vaccinationStatus, onChange }
     ): JSX.Element => {
-
-    const dateIsoString = vaccinationDate ? formatISO(new Date(vaccinationDate)) : undefined
-
-    const onVaccinationDateSelect = (date: Date[]) => {
-        onChange(dateTimeFormat(date[0]))
-    }
 
     return (
         <article className="property-list">
@@ -31,18 +23,10 @@ const VaccinationStatus: FC<VaccinationStatusProps> = (
             </div>
             <div className="datepicker-form-control">
                 <span className="label">Date:</span>
-                <Flatpickr
-                    defaultValue={dateIsoString}
-                    data-enable-time
-                    onChange={onVaccinationDateSelect}
-                    disabled={isVaccinated}
-                    options={{
-                        enableTime: true,
-                        altInput: true,
-                        altFormat: 'd M Y H:i',
-                        time_24hr: true,
-                    }}
-                /></div>
+                <DateTimePicker value={vaccinationDate}
+                    label="Date:" onChange={onChange}
+                    disabled={isVaccinated} />
+            </div>
         </article>
     );
 };
