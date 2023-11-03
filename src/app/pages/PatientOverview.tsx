@@ -5,9 +5,11 @@ import Table, { TColumn } from '../components/Table/Table';
 import { useNavigate } from 'react-router-dom';
 import { dataHandler } from '../../service/dataHandler';
 import { definePateintStatus } from '../helpers/patientStatus';
+import { usePatientContext } from '../../context/contextHooks/usePatientsContext';
 
 export const PatientOverview = () => {
-	const [patients, setPatients] = useState<PatientEntity[] | null>(null);
+	const { patients, setPatients } = usePatientContext();
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
 
@@ -44,7 +46,7 @@ export const PatientOverview = () => {
 					() => setIsLoading(false)
 				)
 		}
-	}, [patients])
+	})
 
 	
 	const defineRowStyling = (row: PatientEntity) => {

@@ -3,6 +3,7 @@ import './styles/index.scss';
 import reportWebVitals from './reportWebVitals';
 import App from './app/App';
 import { BrowserRouter } from 'react-router-dom';
+import { AppContextProvider } from './context/AppContext';
 
 
 const root = ReactDOM.createRoot(
@@ -12,7 +13,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<BrowserRouter>
-		<App />
+		<AppContextProvider>
+			<App />
+		</AppContextProvider>
 	</BrowserRouter>
 );
 
