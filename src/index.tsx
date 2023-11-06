@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import './styles/index.scss';
 import reportWebVitals from './reportWebVitals';
-import App from './app/App';
 import { BrowserRouter } from 'react-router-dom';
 import { AppContextProvider } from './context/AppContext';
+import { Routes } from './routes/Routes';
 
 
 const root = ReactDOM.createRoot(
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
 	<BrowserRouter>
 		<AppContextProvider>
-			<App />
+			<Routes />
 		</AppContextProvider>
 	</BrowserRouter>
 );
