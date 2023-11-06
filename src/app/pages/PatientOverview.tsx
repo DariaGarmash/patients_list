@@ -45,7 +45,7 @@ export const PatientOverview = () => {
 				.catch(e => showBoundary(e))
 				.finally(() => setIsLoading(false))
 		}
-	})
+	}, [patients, setPatients, showBoundary])
 	
 	const defineRowStyling = (row: PatientEntity) => {
 		return definePateintStatus(row.vaccinationStatus)

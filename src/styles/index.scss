@@ -24,20 +24,25 @@
 
 .app-wrapper {
 
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: spacing(4) spacing(5);
-	box-sizing: border-box;
-
 	.app-header {
-		padding: spacing(1) 0;
-	}
-
-	.error {
-		text-align: center;
-		padding: spacing(1) spacing(1);
-		background: $danger;
+		background: $primary;
 		color: $white;
-		flex-basis: 100%;
+
+		>* {
+			display: flex;
+			justify-content: space-between;
+			padding: spacing(3) 0;
+		}
+
+		.logout-wrapper {
+			display: flex;
+			gap: spacing(2);
+			align-items: center;
+
+			.button {
+				padding: 0;
+				font-size: 18px;
+			}
+		}
 	}
 }

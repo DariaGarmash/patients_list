@@ -1,12 +1,22 @@
 import React, { useState, FormEventHandler, ChangeEvent } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { dataHandler } from '../../service/dataHandler'
+import { TSetUser, TUser } from '../../context/reducers/userReducer'
+import { useUserContext } from '../../context/contextHooks/userContext '
+import { cookieAuthHandler } from '../../utils/cookies'
 
-type TUserFormaData = {
-    email: string,
+type TUserFormaData = TUser & Omit<TUser, 'authenticated'> & {
     password: string
 }
-
 const Login = () => {
-    const [formData, setFormData] = useState<TUserFormaData>({ email: '', password: '' })
+    const { authenticated, user, login } = useUserContext()
+    const [formData, setFormData] = useState<TUserFormaData>({ ...user, password: '' })
+    const [error, setError] = useState('')
+    const navigate = useNavigate()
+
+    if (authenticated) {
+        return <Navigate to='/' replace/>
+    }
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({
@@ -17,8 +27,20 @@ const Login = () => {
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault()
-        console.log('on login', formData)
+        
+        setError('')
+        dataHandler.post<TUserFormaData, TSetUser>('login', formData)
+            .then((res) => {
+                const http = window.location.protocol === 'https' ? 'HttpOnly;' : '';
+                cookieAuthHandler.setCookie(res.token, `Secure; ${http} SameSite=Strict;`)
+                login(res)
+                navigate('/')
+            }).catch(error => {
+                setError('Login failed, unknown email or password')
+            })
     }
+
+    
 
     return (
         <>
@@ -28,6 +50,7 @@ const Login = () => {
 
                 <button type='submit'>Login</button>
             </form>
+            {!!error && <p>{error}</p>}
         </>
 
     )

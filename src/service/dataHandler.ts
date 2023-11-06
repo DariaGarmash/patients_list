@@ -1,8 +1,10 @@
 type TFetchMethod = "GET" | "PUT" | "POST" | "DELETE";
+type THeaders = Record<string, string>
 
 type TFetchConfig<TMethod extends TFetchMethod, TBody = undefined> = {
     method: TMethod;
     body?: TBody;
+    headers?: THeaders;
 };
 
 type TFetchConfigGet = Omit<TFetchConfig<"GET">, 'body'>
@@ -25,15 +27,20 @@ type TFetchConfigGeneric<TBody = undefined> = TFetchConfigGet | TFetchConfigPost
 class DataHandler {
     private apiBaseUrl = '/api/v1/'
 
-    private fetch = async <T>(endpoint: string, config: TFetchConfigGeneric<T>): Promise<T> => {
+    private fetch = async <T, K>(endpoint: string, config: TFetchConfigGeneric<T>): Promise<K> => {
         try {
-           
+
             const body = this.isConfigPut(config) || this.isConfigPost(config) ? JSON.stringify(config.body) : undefined;
-            
-            const fetchConfig = ({ 
-                method: config.method, 
+
+            const defaultHeaders = {
+                'Content-Type': 'application/json',
+            }
+
+            const fetchConfig = ({
+                method: config.method,
                 headers: {
-                    'Content-Type': 'application/json',
+                    ...defaultHeaders,
+                    ...(config.headers && { ...config.headers })
                 },
                 body
             });
@@ -42,14 +49,14 @@ class DataHandler {
             const url = `${this.apiBaseUrl}${endpoint}${id ? `/${id}` : ''}`;
 
             const res = await fetch(url, fetchConfig)
-            if(!res.ok){
+            if (!res.ok) {
                 throw Error("Error sending request")
             }
 
             const data = await res.json();
-            return data as T;
-        
-        }catch(e: unknown){
+            return data as K;
+
+        } catch (e: unknown) {
             throw Error("Error sending request")
         }
     }
@@ -65,17 +72,17 @@ class DataHandler {
     private isConfigDelete<TBody>(config: TFetchConfigGeneric<TBody>): config is TFetchConfigDelete {
         return (config as TFetchConfigDelete).method === 'DELETE';
     }
-    
-    public get = async <T>(url: string) => {
-        return this.fetch<T>(url, {method: "GET"})
+
+    public get = async <T,>(url: string, headers?: THeaders) => {
+        return this.fetch<T, T>(url, { method: "GET", headers })
     }
 
-    public put = async <T>(url: string, id: string, body: T) => {
-        return this.fetch<T>(url, {method: "PUT", id, body})
+    public put = async <T, K>(url: string, id: string, body: T, headers?: THeaders) => {
+        return this.fetch<T, K>(url, { method: "PUT", headers, id, body })
     }
 
-    public post = async <T>(url: string, body: T) => {
-        return this.fetch<T>(url, {method: 'POST', body})
+    public post = async <T, K>(url: string, body: T, headers?: THeaders) => {
+        return this.fetch<T, K>(url, { method: 'POST', headers, body })
     }
 }
 

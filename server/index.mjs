@@ -8,10 +8,42 @@ const pathToData = new URL('data/patients.json', import.meta.url);
 
 const data = JSON.parse(fs.readFileSync(pathToData));
 
-app.get('/api/v1/patients', (_ , res) => {
+const timeOut = 300
+const userName = "Test User"
+
+app.get('/api/v1/patients', (_, res) => {
   setTimeout(() => {
     res.json(data);
-  }, 300);
+  }, timeOut);
+});
+
+app.post('/api/v1/register', (_, res) => {
+  setTimeout(() => {
+    // validate token properly
+    // handle 403 UnAuthorized request
+    res.json({
+      name: userName
+    }
+    );
+  }, timeOut);
+});
+
+app.post('/api/v1/login', (_, res) => {
+  setTimeout(() => {
+    // handle 403 UnAuthorized request
+    res.json({
+      token: 'your-secure-token',
+      name: userName,
+    });
+  }, timeOut);
+});
+
+app.post('/api/v1/logout', (_, res) => {
+  setTimeout(() => {
+    res.json({
+      status: "ok",
+    });
+  }, timeOut);
 });
 
 app.listen(3001, (_) => {

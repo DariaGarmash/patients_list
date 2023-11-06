@@ -4,7 +4,7 @@ type HeaderProps = {
     title: string;
 }
 const Header = ({title}: HeaderProps): JSX.Element => {
-    return <section className="app-header"><h1>{title}</h1></section>;
+    return <section className="page-header"><h1>{title}</h1></section>;
 };
 
 export default Header;
