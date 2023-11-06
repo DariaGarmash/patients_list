@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { dataHandler } from '../../service/dataHandler'
 import { TSetUser, TUser } from '../../context/reducers/userReducer'
 import { useUserContext } from '../../context/contextHooks/userContext '
-import { cookieAuthHandler } from '../../utils/cookies'
 import Form, { FormInput, FormSubmit } from '../components/Form'
 
 type TUserFormaData = TUser & Omit<TUser, 'authenticated'> & {
@@ -23,8 +22,6 @@ const Login = () => {
         setError('')
         dataHandler.post<TUserFormaData, TSetUser>('login', updatedFormData)
             .then((res) => {
-                const http = window.location.protocol === 'https' ? 'HttpOnly;' : '';
-                cookieAuthHandler.setCookie(res.token, `Secure; ${http} SameSite=Strict;`)
                 login(res)
                 navigate('/')
             }).catch(error => {

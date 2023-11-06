@@ -2,7 +2,6 @@ import React, { MouseEvent } from 'react'
 import Button from '../components/Button'
 import { useUserContext } from '../../context/contextHooks/userContext '
 import { dataHandler } from '../../service/dataHandler'
-import { cookieAuthHandler } from '../../utils/cookies'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '../components/Avatar'
 import { FaPowerOff } from "react-icons/fa";
@@ -16,7 +15,6 @@ const Logout = () => {
 
         dataHandler.post('logout', {})
             .then((res) => {
-                cookieAuthHandler.removeCookie()
                 logout()
                 navigate('/')
             }).catch(error => {
