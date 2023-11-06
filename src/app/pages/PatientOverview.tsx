@@ -16,21 +16,19 @@ export const PatientOverview = () => {
 
 	const navigate = useNavigate();
 
-	const columns: TColumn<PatientEntity>[] = [
-		{ key: "fullName", label: 'Full name' },
-		{ key: "age", label: 'Age' },
-		{ key: 'sex', label: 'Sex' },
-		{ key: "vaccinationStatus", label: 'Status' },
-		{ key: "vaccinationDate", label: 'Vaccination date' },
-		{ key: 'actions', label: '' },
-	]
-
 	const onEdit = (row: PatientEntity) => {
 		navigate(`/patient/${row.id}/edit`)
 	}
 
-	const actions = [
-		{ label: 'Edit', onClick: onEdit }
+	const columns: TColumn<PatientEntity>[] = [
+		{ key: "fullName", label: 'Full name' },
+		{ key: "age", label: 'Age' },
+		{ key: 'sex', label: 'Sex' },
+		// { key: "vaccinationStatus", label: 'Status' },
+		{ key: "vaccinationDate", label: 'Vaccination date' },
+		{ key: 'actions', label: '', align: 'right', actions: [
+			{ type: 'edit', label: 'Edit', onClick: onEdit }
+		] },
 	]
 
 	useEffect(() => {
@@ -54,7 +52,7 @@ export const PatientOverview = () => {
 	return (
 		<>	
 			<Header title='Patients'/>
-			<Table data={patients} columns={columns} actions={actions}
+			<Table data={patients} columns={columns}
 				isLoading={isLoading}
 				rowClassNamesSetter={defineRowStyling}/>
 		</>

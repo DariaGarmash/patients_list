@@ -4,12 +4,16 @@ import NoData from "../states/NoData";
 import TableHeader from "./TableHeader";
 import TableRows from "./TableRows";
 
+export type TColumnAlignment = 'right'| 'center' | 'left'
 export type TColumn<T> = {
 	key: (keyof T) | 'actions';
 	label: string;
+	actions?: TAction<T>[];
+	align?: TColumnAlignment;
 }
 
 export type TAction<T> = {
+	type: string;
 	label: string;
 	onClick: (row: T) => void
 }
@@ -20,11 +24,10 @@ export type TableProps<T> = {
 	data?: T[] | null;
 	columns: TColumn<T>[];
 	isLoading?: boolean;
-	actions?: TAction<T>[];
 	rowClassNamesSetter?: TRowClassNamesSetter<T>
 }
 
-export const Table = <T extends object>({ data, columns, isLoading, actions = [], rowClassNamesSetter }: TableProps<T>) => {
+export const Table = <T extends object>({ data, columns, isLoading, rowClassNamesSetter }: TableProps<T>) => {
 
 	if (data == null|| isLoading) {
 		return <Loader />
@@ -41,7 +44,7 @@ export const Table = <T extends object>({ data, columns, isLoading, actions = []
 	return (
 		<table className="table">
 			<TableHeader columns={columns} />
-			<TableRows data={data} columns={columns} actions={actions} rowClassNamesSetter={rowClassNamesSetter}/>
+			<TableRows data={data} columns={columns} rowClassNamesSetter={rowClassNamesSetter}/>
 		</table>
 	);
 };

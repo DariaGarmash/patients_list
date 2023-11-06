@@ -21,3 +21,13 @@ $btn-types: primary, secondary;
         }
     }
 }
+
+$alignments: right, left, center;
+
+@mixin alignments {
+    @each $item in $alignments {
+        .is-aligned-#{$item} {
+            text-align: $item;
+        }
+    }
+}
