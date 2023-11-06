@@ -1,0 +1,19 @@
+{
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+        "**/*.{js,ts}",
+        "!**/node_modules/**",
+        "!**/build/**",
+        "!**/reportWebVitals.ts",
+        "!**/index.tsx"
+    ],
+    "transform": {
+        "^.+\\.m?js$": "babel-jest"
+    },
+    "testMatch": [
+        "**/tests/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
+    "modulePathIgnorePatterns": []
+}

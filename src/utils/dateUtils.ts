@@ -3,7 +3,7 @@ import { format, formatDuration, intervalToDuration } from "date-fns"
 export const defaultDateFormat = 'dd MMM yyyy'
 export const defaultDateTimeFormat = `${defaultDateFormat} HH:mm`
 
-export const dateFormatBase = (formatType: string, dateInput?: string | Date) => {
+export const dateFormatBase = (formatType: string, dateInput?: string | Date | null) => {
     if(!dateInput){
         return ''
     }
@@ -12,11 +12,11 @@ export const dateFormatBase = (formatType: string, dateInput?: string | Date) =>
     return format(date, formatType)
 }
 
-export const dateFormat = (dateInput?: string | Date, formatType = defaultDateFormat,) => {
+export const dateFormat = (dateInput?: string | Date | null, formatType = defaultDateFormat,) => {
     return dateFormatBase(formatType, dateInput)
 }
 
-export const dateTimeFormat = (dateInput?: string | Date, formatType = defaultDateTimeFormat) => {
+export const dateTimeFormat = (dateInput?: string | Date | null, formatType = defaultDateTimeFormat) => {
     return dateFormatBase(formatType, dateInput)
 }
 

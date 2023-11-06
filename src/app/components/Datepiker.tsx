@@ -3,7 +3,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/airbnb.css';
 import { dateTimeFormat } from "../../utils/dateUtils";
 
-type TValue = string | Date
+type TValue = string | Date | null
 type TOptions = flatpickr.Options.Options
 type DateTimePickerProps = {
     value?: TValue,
