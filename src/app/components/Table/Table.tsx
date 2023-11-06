@@ -1,4 +1,4 @@
-import ErrorState from "../states/ErrorState";
+import InvalidFormat from "../states/InvalidFormat";
 import Loader from "../states/Loading";
 import NoData from "../states/NoData";
 import TableHeader from "./TableHeader";
@@ -20,21 +20,18 @@ export type TableProps<T> = {
 	data?: T[] | null;
 	columns: TColumn<T>[];
 	isLoading?: boolean;
-	error?: string;
 	actions?: TAction<T>[];
 	rowClassNamesSetter?: TRowClassNamesSetter<T>
 }
 
-export const Table = <T extends object>({ data, columns, isLoading, error, actions = [], rowClassNamesSetter }: TableProps<T>) => {
-	if (!!error) {
-		return <ErrorState message={error}/>
-	}
+export const Table = <T extends object>({ data, columns, isLoading, actions = [], rowClassNamesSetter }: TableProps<T>) => {
+
 	if (data == null|| isLoading) {
 		return <Loader />
 	}
 
 	if (!Array.isArray(data)) {
-		return <p>Wrong data format</p>
+		return <InvalidFormat/>
 	}
 
 	if (data.length === 0) {

@@ -1,8 +1,13 @@
-type ErrorStateProps = {
-    message?: string;
-}
-const ErrorState = ({message = 'Error has occured. Please try again.'}: ErrorStateProps): JSX.Element => {
-    return <section className="error-state"><p>{message}</p></section>;
+import { FallbackProps } from 'react-error-boundary'
+
+const ErrorState = ({ error }: FallbackProps): JSX.Element => {
+    return (
+        <section role="alert" className='error-state'>
+            <div></div>
+            <p>Something went wrong</p>
+            <pre>{error.message}</pre>
+        </section>
+    );
 };
 
 export default ErrorState;

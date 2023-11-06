@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { dataHandler } from '../../service/dataHandler';
 import { definePateintStatus } from '../helpers/patientStatus';
 import { usePatientContext } from '../../context/contextHooks/usePatientsContext';
+import { useErrorBoundary } from 'react-error-boundary';
 
 export const PatientOverview = () => {
+	const { showBoundary } = useErrorBoundary();
 	const { patients, setPatients } = usePatientContext();
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState('');
 
 	const navigate = useNavigate();
 
@@ -34,20 +35,17 @@ export const PatientOverview = () => {
 
 	useEffect(() => {
 		if (patients == null) {
+			setIsLoading(true)
 			dataHandler.get<TPatient[]>('patients')
 				.then(data => {
 					const filteredData = new PatientsView(data).getPatients({ age: 16 })
 					setPatients(filteredData)
 				}
 				)
-				.catch(e => {
-					setError(e.message)
-				}).finally(
-					() => setIsLoading(false)
-				)
+				.catch(e => showBoundary(e))
+				.finally(() => setIsLoading(false))
 		}
 	})
-
 	
 	const defineRowStyling = (row: PatientEntity) => {
 		return definePateintStatus(row.vaccinationStatus)
@@ -57,7 +55,7 @@ export const PatientOverview = () => {
 		<>	
 			<Header title='Patients'/>
 			<Table data={patients} columns={columns} actions={actions}
-				isLoading={isLoading} error={error} 
+				isLoading={isLoading}
 				rowClassNamesSetter={defineRowStyling}/>
 		</>
 		
