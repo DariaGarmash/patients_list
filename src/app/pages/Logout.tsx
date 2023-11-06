@@ -4,6 +4,8 @@ import { useUserContext } from '../../context/contextHooks/userContext '
 import { dataHandler } from '../../service/dataHandler'
 import { cookieAuthHandler } from '../../utils/cookies'
 import { useNavigate } from 'react-router-dom'
+import Avatar from '../components/Avatar'
+import { FaPowerOff } from "react-icons/fa";
 
 const Logout = () => {
     const {user, logout} = useUserContext()
@@ -24,8 +26,9 @@ const Logout = () => {
 
     return (
         <div className='logout-wrapper'>
+            <Avatar small />
             <span>{user.name.toUpperCase()}</span>
-            <Button onClick={onLogout}>Logout</Button>
+            <Button onClick={onLogout}><FaPowerOff /></Button>
         </div>
         
     )

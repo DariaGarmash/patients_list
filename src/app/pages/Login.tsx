@@ -1,16 +1,17 @@
-import React, { useState, FormEventHandler, ChangeEvent } from 'react'
+import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { dataHandler } from '../../service/dataHandler'
 import { TSetUser, TUser } from '../../context/reducers/userReducer'
 import { useUserContext } from '../../context/contextHooks/userContext '
 import { cookieAuthHandler } from '../../utils/cookies'
+import Form, { FormInput, FormSubmit } from '../components/Form'
 
 type TUserFormaData = TUser & Omit<TUser, 'authenticated'> & {
     password: string
 }
 const Login = () => {
     const { authenticated, user, login } = useUserContext()
-    const [formData, setFormData] = useState<TUserFormaData>({ ...user, password: '' })
+
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
@@ -18,18 +19,9 @@ const Login = () => {
         return <Navigate to='/' replace/>
     }
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }))
-    }
-
-    const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-        e.preventDefault()
-        
+    const onSubmit = (updatedFormData: TUserFormaData) => {
         setError('')
-        dataHandler.post<TUserFormaData, TSetUser>('login', formData)
+        dataHandler.post<TUserFormaData, TSetUser>('login', updatedFormData)
             .then((res) => {
                 const http = window.location.protocol === 'https' ? 'HttpOnly;' : '';
                 cookieAuthHandler.setCookie(res.token, `Secure; ${http} SameSite=Strict;`)
@@ -40,19 +32,28 @@ const Login = () => {
             })
     }
 
-    
+    const formInitialData = { ...user, password: '' }
+
+    const formInputs: FormInput[] = [
+        { label: 'E-mail', name: 'email', type: 'email', required: true },
+        { label: 'Password', name: 'password', type: 'password', required: true }
+    ]
+
+    const formSubmit: FormSubmit<TUserFormaData> = {
+        buttonLabel: 'Login',
+        onSubmit
+    }
 
     return (
-        <>
-            <form onSubmit={onSubmit}>
-                <input type="email" name="email" required onChange={onChange} />
-                <input type="password" name="password" required onChange={onChange} />
-
-                <button type='submit'>Login</button>
-            </form>
-            {!!error && <p>{error}</p>}
-        </>
-
+        authenticated ?
+            <></> :
+            <section className='login-page'>
+                <Form inputs={formInputs}
+                    submit={formSubmit}
+                    initialFormData={formInitialData}
+                    errorMessage={error}
+                />
+            </section>
     )
 }
 

@@ -1,0 +1,33 @@
+%form-border-radius {
+    border-radius: $border-radius;
+}
+
+.form-holder {
+    border: 1px solid $primary;
+    padding: spacing(2);
+    min-width: 300px;
+    @extend %form-border-radius;
+
+    .form-content {
+        margin-bottom: spacing(2);
+
+        .form-control {
+            margin-bottom: spacing(1);
+
+            label {
+                display: block;
+                margin-bottom: spacing(0.5);
+                @extend %form-border-radius;
+
+                +* {
+                    padding: spacing(0.5) spacing(1);
+                    border: 1px solid $primary;
+                    @extend %form-border-radius;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+
+}
