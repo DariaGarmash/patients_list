@@ -1,4 +1,4 @@
-import { PatientEntity, TPatientSex, TVaccinationStatus, VaccinationStatusDetector } from "../../adapters/patientsDataAdapter";
+import { PatientEntity, TPatient, TPatientSex, TVaccinationStatus, VaccinationStatusDetector } from "../../adapters/patientsDataAdapter";
 
 const verifyTestCases = (detector: VaccinationStatusDetector, testCases: Array<[Partial<PatientEntity>, TVaccinationStatus]>) => {
     testCases.forEach(([patientData, expectedStatus]) => {
@@ -12,12 +12,9 @@ const verifyTestCases = (detector: VaccinationStatusDetector, testCases: Array<[
     });
 }
 
-describe('VaccinationStatusDetector', () => {
-    let detector: VaccinationStatusDetector;
+let detector = new VaccinationStatusDetector();
 
-    beforeEach(() => {
-        detector = new VaccinationStatusDetector();
-    });
+describe('VaccinationStatusDetector', () => {
 
     it('should correctly detect vaccination status for female', () => {
         const testCasesFemale: Array<[Partial<PatientEntity>, TVaccinationStatus]> = [
@@ -39,5 +36,26 @@ describe('VaccinationStatusDetector', () => {
         ];
 
         verifyTestCases(detector, testCasesMale)
+    });
+});
+
+
+describe('PatientView', () => {
+    it('should adapt a patient data with correct properties and status', () => {
+        const patientData: TPatient = {
+            firstName: 'Dakota',
+            lastName: 'Smith',
+            birthDate: "2014-07-29T17:55:05.848Z",
+            sex: 'male',
+            isVaccinated: true,
+            vaccinationDate: "2021-07-07T15:55:08.010Z"
+        };
+
+        const patient = new PatientEntity(patientData, detector);
+
+        expect(patient.fullName).toBe('Dakota Smith');
+        expect(patient.birthDate).toBe('29 Jul 2014');
+        expect(patient.age).toBe(9);
+        expect(patient.vaccinationStatus).toBe('done');
     });
 });
