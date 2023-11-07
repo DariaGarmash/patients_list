@@ -36,13 +36,13 @@ describe('VaccinationStatus component', () => {
         expect(datepicker).toHaveAttribute('disabled');
     });
 
-    it.only('should handle date change when not vaccinated', async () => {
+    it('should handle date change when not vaccinated', async () => {
         const notVaccinatedPatient: VaccinationStatusProps = {
             ...mockPatient,
             isVaccinated: false,
         };
 
-        const { container, debug } = render(<VaccinationStatus {...notVaccinatedPatient} />);
+        render(<VaccinationStatus {...notVaccinatedPatient} />);
 
         const datepicker = getDatepickerHTMLElement();
 
