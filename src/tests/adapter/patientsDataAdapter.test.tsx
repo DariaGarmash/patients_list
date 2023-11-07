@@ -1,4 +1,5 @@
-import { PatientEntity, TPatient, TPatientSex, TVaccinationStatus, VaccinationStatusDetector } from "../../adapters/patientsDataAdapter";
+import { PatientEntity, PatientsView, TPatient, TPatientSex, TVaccinationStatus, VaccinationStatusDetector } from "../../adapters/patientsDataAdapter";
+import { mockedPatients } from "../mocked/data/patients";
 
 const verifyTestCases = (detector: VaccinationStatusDetector, testCases: Array<[Partial<PatientEntity>, TVaccinationStatus]>) => {
     testCases.forEach(([patientData, expectedStatus]) => {
@@ -58,4 +59,33 @@ describe('PatientView', () => {
         expect(patient.age).toBe(9);
         expect(patient.vaccinationStatus).toBe('done');
     });
+
+    it('should filter patients based on age', () => {
+        const patientsData: TPatient[] = mockedPatients;
+
+        const patients = new PatientsView(patientsData);
+
+        const ageFilter = 15
+        const filter = { age: ageFilter };
+        const filteredPatients = patients.getPatients(filter);
+
+        const expctedFilteredPatients = patients.getPatients().filter(p => p.age < ageFilter)
+        expect(filteredPatients).toHaveLength(expctedFilteredPatients.length);
+
+        filteredPatients.forEach(patient => {
+            expect(patient.age).toBeLessThan(filter.age);
+        });
+    });
+
+    it('should return all patients if no filter is provided', () => {
+        const patientsData: TPatient[] = mockedPatients;
+
+        const patients = new PatientsView(patientsData);
+
+        const filter = undefined;
+        const filteredPatients = patients.getPatients(filter);
+
+        expect(filteredPatients).toHaveLength(patients.getPatients().length);
+    });
+
 });

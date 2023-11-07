@@ -4,7 +4,7 @@ export const mockedPatients: TPatient[] = [
     {
         firstName: "Addison",
         lastName: "Martinez",
-        birthDate: "2017-09-05T20:51:25.182Z",
+        birthDate: "2008-09-05T20:51:25.182Z",
         sex: "male",
         isVaccinated: true,
         vaccinationDate: "2021-03-10T20:43:01.337Z"
@@ -20,7 +20,7 @@ export const mockedPatients: TPatient[] = [
     {
         firstName: "Addison",
         lastName: "Jones",
-        birthDate: "2007-04-01T07:50:03.327Z",
+        birthDate: "2010-04-01T07:50:03.327Z",
         sex: "female",
         isVaccinated: true,
         vaccinationDate: "2021-04-09T10:00:55.837Z"
