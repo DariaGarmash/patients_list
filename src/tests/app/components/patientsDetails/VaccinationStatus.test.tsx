@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { definePateintStatus } from '../../../app/helpers/patientStatus';
-import VaccinationStatus, { VaccinationStatusProps } from '../../../app/components/patientDetails/VaccinationStatus';
+import { definePateintStatus } from '../../../../app/helpers/patientStatus';
+import VaccinationStatus, { VaccinationStatusProps } from '../../../../app/components/patientDetails/VaccinationStatus';
 
 
 const getDatepickerHTMLElement = () => (
