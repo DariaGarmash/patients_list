@@ -21,9 +21,11 @@ describe('VaccinationStatus component', () => {
     it('should render the VaccinationStatus component correctly', () => {
         render(<VaccinationStatus {...mockPatient} />);
 
-        const statusBadge = screen.getByText(mockPatient.vaccinationStatus);
+        const statusBadge = screen.getByText(mockPatient.isVaccinated ? /vaccinated/i : /not vaccinated/i);
 
+        expect(statusBadge).toBeInTheDocument();
         expect(statusBadge).toHaveClass(definePateintStatus(mockPatient.vaccinationStatus));
+
         expect(screen.getByText(mockPatient.isVaccinated ? /vaccinated/i : /not vaccinated/i)).toBeInTheDocument();
         expect(screen.getByText('Date:')).toBeInTheDocument();
         expect(getDatepickerHTMLElement().value).toBe('2023-11-06 01:00');
