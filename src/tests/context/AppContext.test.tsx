@@ -1,28 +1,12 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { AppContext, TAppContext } from '../../context/AppContext';
-
-// Mocking the context value
+import { mockedPatientName, mockedPatientsValue, mockedUserValue } from '../mocked/contextValue';
 
 export const mockedAppContextValue: TAppContext = {
     state: {
-        patients: [
-            {
-                id: "addison_martinez_518",
-                fullName: "Addison Martinez",
-                birthDate: "05 Sep 2017",
-                age: 6,
-                sex: "male",
-                isVaccinated: true,
-                vaccinationDate: "10 Mar 2021 21:43",
-                vaccinationStatus: "done"
-            }
-        ],
-        user: {
-            name: 'User Name',
-            email: 'some-email@gmail.com',
-            authenticated: true
-        }
+        patients: mockedPatientsValue,
+        user: mockedUserValue
     },
     dispatchPatients: jest.fn(),
     dispatchUser: jest.fn()
@@ -44,12 +28,12 @@ describe('AppContextProvider', () => {
         );
 
         await waitFor(() => {
-            const contextUserValue = screen.getByText('User Name');
+            const contextUserValue = screen.getByText(mockedUserValue.name);
             expect(contextUserValue).toBeInTheDocument();
         })
 
         await waitFor(() => {
-            const contexPatientsValue = screen.getByText('Addison Martinez');
+            const contexPatientsValue = screen.getByText(mockedPatientName);
             expect(contexPatientsValue).toBeInTheDocument();
         })
     });
