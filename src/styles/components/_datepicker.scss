@@ -2,6 +2,7 @@
     display: flex;
     align-items: baseline;
     column-gap: spacing(1);
+    width: 100%;
 
     .flatpickr-input {
         +input.form-control {
@@ -10,9 +11,14 @@
             padding: spacing(0.5);
 
             &:hover {
-                cursor: not-allowed;
+                cursor: pointer;
             }
 
+            &:disabled {
+                &:hover {
+                    cursor: not-allowed;
+                }
+            }
         }
     }
 }

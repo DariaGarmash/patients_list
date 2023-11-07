@@ -1,3 +1,4 @@
+import React from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorState from "./components/states/ErrorState";
 import { Outlet } from "react-router-dom";

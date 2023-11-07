@@ -17,9 +17,8 @@ const VaccinationStatus: FC<VaccinationStatusProps> = (
             <div>
                 <span className="label">Status:</span>
                 <span className={`badge ${definePateintStatus(vaccinationStatus)}`}>
-                        {vaccinationStatus}
+                    { isVaccinated? 'Vaccinated': 'Not vaccinated' }
                 </span>
-                <small> ({isVaccinated ? 'vaccinated' : 'not vaccinated'})</small>
             </div>
             <div className="datepicker-form-control">
                 <DateTimePicker value={vaccinationDate}
