@@ -9,5 +9,7 @@ export const definePateintStatus = (statusValue: TVaccinationStatus) => {
         'overdue': 'is-danger',
         'not_done': 'is-not-started'
     }
-    return defineStatus<TVaccinationStatus, TStatus>(statusValue, styleMap)
+
+    const statusState = defineStatus<TVaccinationStatus, TStatus>(statusValue, styleMap)
+    return `status ${statusState}`
 };
