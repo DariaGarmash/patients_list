@@ -16,7 +16,7 @@ const Logout = () => {
         dataHandler.post('logout', {})
             .then((res) => {
                 logout()
-                navigate('/')
+                navigate('/login')
             }).catch(error => {
                 throw Error('Logout failed')
             })

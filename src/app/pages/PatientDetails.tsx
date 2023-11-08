@@ -27,7 +27,6 @@ export const PatientDetails = () => {
 		const updated = { ...patient, vaccinationDate: dateString }
 
 		setPatient(updated)
-		updatePatient(updated)
 		setChanged(!changed)
 	}
 
@@ -41,7 +40,7 @@ export const PatientDetails = () => {
 
 	const element = (
 		patient == null ?
-			<NoData/> :
+			<NoData /> :
 			<>
 				<section className="row">
 					<Avatar url={patient.avatarUrl} />
@@ -57,10 +56,10 @@ export const PatientDetails = () => {
 				</section>
 				<section className="row">
 					<Panel title='Vaccination'>
-						<VaccinationStatus {...patient} onChange={onVaccinationDateSelect}/>
+						<VaccinationStatus {...patient} onChange={onVaccinationDateSelect} />
 						<Button actionType="edit" fullWidth onClick={onSave} disabled={!changed}>Save</Button>
 					</Panel>
-					
+
 				</section>
 			</>
 
@@ -68,8 +67,8 @@ export const PatientDetails = () => {
 
 	return (
 		<>
-			<Header title='Patient'/>
-			{!patient ? <NoData/> : element}
+			<Header title='Patient' />
+			{!patient ? <NoData /> : element}
 		</>
 	);
 };
