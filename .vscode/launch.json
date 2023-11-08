@@ -11,42 +11,6 @@
       "sourceMapPathOverrides": {
         "webpack:///./*": "${workspaceFolder}/src/*"
       }
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Jest All",
-      "program": "${workspaceFolder}/node_modules/.bin/react-scriptst",
-      "args": [
-        "test",
-        "--runInBand",
-        "--no-cache",
-        "--watchAll=false"
-      ],
-      "cwd": "${workspaceRoot}",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": {
-        "CI": "true"
-      },
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Jest: current file",
-      "env": {
-        "NODE_ENV": "test"
-      },
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": [
-        "${fileBasenameNoExtension}",
-        "--config",
-        "jest.config.json"
-      ],
-      "console": "integratedTerminal",
-      "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
-      }
     }
   ]
 }

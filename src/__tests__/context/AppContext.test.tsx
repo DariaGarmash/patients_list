@@ -21,20 +21,18 @@ describe('AppContextProvider', () => {
                         <div>
                             <p>{value.state.user.name}</p>
                             <p>{value.state.patients?.[0].fullName}</p>
-                        </div>   
+                        </div>
                     )}
                 </AppContext.Consumer>
             </AppContext.Provider>
         );
 
-        await waitFor(() => {
-            const contextUserValue = screen.getByText(mockedUserValue.name);
-            expect(contextUserValue).toBeInTheDocument();
-        })
 
-        await waitFor(() => {
-            const contexPatientsValue = screen.getByText(mockedPatientName);
-            expect(contexPatientsValue).toBeInTheDocument();
-        })
+        const contextUserValue = screen.getByText(mockedUserValue.name);
+        expect(contextUserValue).toBeInTheDocument();
+
+        const contexPatientsValue = screen.getByText(mockedPatientName);
+        expect(contexPatientsValue).toBeInTheDocument();
+
     });
 });

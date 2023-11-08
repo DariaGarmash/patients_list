@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { dataHandler } from '../../service/dataHandler'
 import { TSetUser, TUser } from '../../context/reducers/userReducer'
-import { useUserContext } from '../../context/contextHooks/userContext '
+import { useUserContext } from '../../context/contextHooks/userContext'
 import Form, { FormInput, FormSubmit } from '../components/Form'
 
 type TUserFormaData = TUser & Omit<TUser, 'authenticated'> & {
@@ -15,7 +15,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     if (authenticated) {
-        return <Navigate to='/' replace/>
+        return <Navigate to='/' replace />
     }
 
     const onSubmit = (updatedFormData: TUserFormaData) => {
