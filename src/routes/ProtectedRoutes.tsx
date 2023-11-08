@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import App from '../app/App';
-import { useUserContext } from '../context/contextHooks/userContext ';
+import { useUserContext } from '../context/contextHooks/userContext';
 import { cookieAuthHandler } from '../utils/cookies';
 import { dataHandler } from '../service/dataHandler';
 import { TSetUser } from '../context/reducers/userReducer';

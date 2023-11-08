@@ -1,10 +1,11 @@
+import React, { ComponentProps, ComponentPropsWithoutRef, PropsWithChildren } from 'react'
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorState from "./components/states/ErrorState";
 import { Outlet } from "react-router-dom";
 import Logout from "./pages/Logout";
 
-const App = (): JSX.Element => {
-    return (
+const App = ({ children }: PropsWithChildren): JSX.Element => {
+	return (
 		<section className="app-wrapper">
 			<header className="app-header">
 				<div className="container">
@@ -14,7 +15,7 @@ const App = (): JSX.Element => {
 			</header>
 			<main className="app-content container">
 				<ErrorBoundary FallbackComponent={ErrorState}>
-					<Outlet />
+					{children ?? <Outlet />}
 				</ErrorBoundary>
 			</main>
 		</section>

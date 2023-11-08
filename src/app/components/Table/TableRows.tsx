@@ -1,3 +1,4 @@
+import React from 'react'
 import { TableProps } from "./Table";
 import TableRow from "./TableRow";
 

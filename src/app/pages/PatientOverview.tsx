@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
 import {PatientEntity, PatientsView, TPatient } from "../../adapters/patientsDataAdapter";
 import Header from "../components/Header";

@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import './styles/index.scss';
 import reportWebVitals from './reportWebVitals';
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom';
 import { AppContextProvider } from './context/AppContext';
 import { Routes } from './routes/Routes';

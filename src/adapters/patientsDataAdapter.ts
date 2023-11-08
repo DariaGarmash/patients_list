@@ -9,7 +9,7 @@ export type TPatient = {
     birthDate: string,
     sex: TPatientSex,
     isVaccinated: boolean,
-    vaccinationDate: string,
+    vaccinationDate?: string | null,
     avatarUrl?: string
 }
 

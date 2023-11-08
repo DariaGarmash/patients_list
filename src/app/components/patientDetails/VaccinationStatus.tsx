@@ -4,7 +4,7 @@ import { definePateintStatus } from "../../helpers/patientStatus";
 import DateTimePicker from "../Datepiker";
 
 type TPickedProperties = 'isVaccinated' | 'vaccinationDate' | 'vaccinationStatus'
-type VaccinationStatusProps = Pick<PatientEntity, TPickedProperties> & {
+export type VaccinationStatusProps = Pick<PatientEntity, TPickedProperties> & {
     onChange: (date: string) => void
 }
   
@@ -17,15 +17,13 @@ const VaccinationStatus: FC<VaccinationStatusProps> = (
             <div>
                 <span className="label">Status:</span>
                 <span className={`badge ${definePateintStatus(vaccinationStatus)}`}>
-                        {vaccinationStatus}
+                    { isVaccinated? 'Vaccinated': 'Not vaccinated' }
                 </span>
-                <small> ({isVaccinated ? 'vaccinated' : 'not vaccinated'})</small>
             </div>
             <div className="datepicker-form-control">
-                <span className="label">Date:</span>
                 <DateTimePicker value={vaccinationDate}
                     label="Date:" onChange={onChange}
-                    disabled={isVaccinated} />
+                    disabled={isVaccinated}/>
             </div>
         </article>
     );

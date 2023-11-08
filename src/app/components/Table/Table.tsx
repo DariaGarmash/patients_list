@@ -1,4 +1,4 @@
-import InvalidFormat from "../states/InvalidFormat";
+import React from 'react'
 import Loader from "../states/Loading";
 import NoData from "../states/NoData";
 import TableHeader from "./TableHeader";
@@ -31,10 +31,6 @@ export const Table = <T extends object>({ data, columns, isLoading, rowClassName
 
 	if (data == null|| isLoading) {
 		return <Loader />
-	}
-
-	if (!Array.isArray(data)) {
-		return <InvalidFormat/>
 	}
 
 	if (data.length === 0) {

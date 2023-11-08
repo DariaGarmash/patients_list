@@ -1,3 +1,4 @@
+import React from 'react'
 import { FallbackProps } from 'react-error-boundary'
 
 const ErrorState = ({ error }: FallbackProps): JSX.Element => {
