@@ -16,15 +16,19 @@
       "type": "node",
       "request": "launch",
       "name": "Jest All",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "env": {
-        "NODE_ENV": "test"
-      },
+      "program": "${workspaceFolder}/node_modules/.bin/react-scriptst",
       "args": [
-        "--runInBand"
+        "test",
+        "--runInBand",
+        "--no-cache",
+        "--watchAll=false"
       ],
+      "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen"
+      "internalConsoleOptions": "neverOpen",
+      "env": {
+        "CI": "true"
+      },
     },
     {
       "type": "node",
