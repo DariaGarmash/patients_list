@@ -22,8 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll --no-cache",
-    "test:coverage": "npm run test -- --coverage --runInBand",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
+    "test-coverage": "npm run test -- --coverage --runInBand",
+    "test-debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .ts,.tsx,.js",
     "server:start": "node ./server/index.mjs"
