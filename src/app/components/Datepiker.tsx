@@ -1,4 +1,4 @@
-import React, {FC, useRef, useEffect} from "react";
+import React, { FC, useRef, useEffect } from "react";
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/airbnb.css';
 import { dateTimeFormat } from "../../utils/dateUtils";
@@ -13,8 +13,8 @@ type DateTimePickerProps = {
     disabled?: boolean
 }
 const DateTimePicker: FC<DateTimePickerProps> = (
-        {value, customOptions, onChange, label, disabled}: DateTimePickerProps
-    ): JSX.Element => {
+    { value, customOptions, onChange, label, disabled }: DateTimePickerProps
+): JSX.Element => {
 
     const defaultOptions: TOptions = {
         enableTime: true,
@@ -30,20 +30,20 @@ const DateTimePicker: FC<DateTimePickerProps> = (
         ...(customOptions && { ...customOptions }),
         defaultDate: currentValue
     }
-    
+
     const node = useRef(null);
 
     useEffect(() => {
-        if(node.current == null){
+        if (node.current == null) {
             return
         }
-        
+
         const flatpickrNode = flatpickr(node.current, config)
 
-        if(onChange){
+        if (onChange) {
             const onSelect: flatpickr.Options.Hook = (selectedDates: Date[]) => {
                 const updatedValue = dateTimeFormat(selectedDates[0])
-                onChange(updatedValue )
+                onChange(updatedValue)
             }
             flatpickrNode.config.onChange.push(onSelect)
         }
@@ -52,12 +52,12 @@ const DateTimePicker: FC<DateTimePickerProps> = (
             flatpickrNode.destroy();
         };
 
-    })
+    }, [node.current])
 
     return (
         <div className="datepicker-form-control">
-            {label && <span className="label">{label}</span>}
-            <input ref={node} disabled={disabled}/>
+            {label && <label className="label">{label}</label>}
+            <input ref={node} disabled={disabled} />
         </div>
     );
 };

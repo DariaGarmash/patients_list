@@ -8,8 +8,7 @@ const App = ({ children }: PropsWithChildren): JSX.Element => {
 	return (
 		<section className="app-wrapper">
 			<header className="app-header">
-				<div className="container">
-					<nav></nav>
+				<div className="container app-header-holder">
 					<Logout />
 				</div>
 			</header>

@@ -23,7 +23,7 @@ const Button: FC<ButtonProps> = ({ onClick, label, icon, actionType, children, f
 
     const btnTypeClassName = actionType ? buttonClassMap[actionType] : 'is-primary'
 
-    const btnIcon = icon || ""
+    const btnIcon = icon ?? ""
     const innerNode = (children ?? `${btnIcon}${label}`)
     return (
         <button className={`button ${btnTypeClassName} ${fullWidth ? 'full-width' : ""}`}

@@ -18,14 +18,14 @@ const TableRow = <T,>({ row, columns, className }: TableRowProps<T>): JSX.Elemen
 			<>{actions.map(act => <Button key={act.type} label={act.label} onClick={() => act.onClick(row)}>{act.label}</Button>)}</>
 	)
 
-	const getCellNode = (key: string, value: string, align: TColumn<T>['align'], actions: TColumn<T>['actions'] = [] ) => {
+	const getCellNode = (key: string, value: string, align: TColumn<T>['align'], actions: TColumn<T>['actions'] = []) => {
 		const isCellWithActions = key === 'actions'
 		const actionsNode = getActionsNode(actions)
 		return (
 			<td key={`cell-${key}`}
 				className={align ? `is-aligned-${align}` : ''}>
 				{isCellWithActions && actionsNode ? actionsNode : value}
-		</td>
+			</td>
 		)
 	}
 
@@ -34,12 +34,12 @@ const TableRow = <T,>({ row, columns, className }: TableRowProps<T>): JSX.Elemen
 			const colKey = column.key
 			const value = (row as any)[column.key]
 			return getCellNode(String(colKey), value, column.align, column.actions)
-			})
+		})
 		}</>
 	)
 
 	return (
-		<tr key={`row-${JSON.stringify}`} className={className}>
+		<tr className={className}>
 			{cells}
 		</tr>
 	);

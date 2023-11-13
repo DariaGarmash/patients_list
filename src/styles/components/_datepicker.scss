@@ -1,8 +1,7 @@
 .datepicker-form-control {
     display: flex;
     align-items: baseline;
-    column-gap: spacing(1);
-    width: 100%;
+    flex-basis: 100%;
 
     .flatpickr-input {
         +input.form-control {
