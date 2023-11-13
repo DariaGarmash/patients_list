@@ -35,7 +35,8 @@ p {
 }
 
 .property-list {
-    >* {
+
+    .list-item {
         padding: spacing(1) 0;
     }
 

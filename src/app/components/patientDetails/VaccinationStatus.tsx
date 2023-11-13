@@ -14,13 +14,13 @@ const VaccinationStatus: FC<VaccinationStatusProps> = (
 
     return (
         <ul className="property-list">
-            <li>
+            <li className="list-item">
                 <label className="label">Status:</label>
                 <span className={`badge ${definePateintStatus(vaccinationStatus)}`}>
                     {isVaccinated ? 'Vaccinated' : 'Not vaccinated'}
                 </span>
             </li>
-            <li>
+            <li className="list-item">
                 <DateTimePicker value={vaccinationDate}
                     label="Date:" onChange={onChange}
                     disabled={isVaccinated} />
